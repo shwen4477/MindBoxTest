@@ -1,0 +1,6 @@
+select s.productid, count(*) totalcount
+from sales s
+join (select customerid, min(datetime) firstdate from sales group by customerid) t
+on t.firstdate = s.datetime and t.customerid = s.customerid
+group by s.productid
+
